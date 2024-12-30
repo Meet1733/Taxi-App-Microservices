@@ -19,7 +19,9 @@ module.exports.register = async (req, res) => {
         const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' })
 
         res.cookie('token', token);
-        res.send({ message: 'User registered successfully' })
+
+        delete newUser._doc.password;
+        res.send({ token, newUser })
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -45,7 +47,9 @@ module.exports.login = async (req, res) => {
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.cookie('token', token);
-        res.send({ message: 'User logged in successfully' })
+
+        delete user._doc.password;
+        res.send({ token, user })
 
     } catch (error) {
 
