@@ -6,6 +6,8 @@ dotenv.config()
 const cookieParser = require('cookie-parser')
 const connect = require('./db/db')
 connect()
+const rabbitMq = require('./service/rabbit')
+rabbitMq.connect();
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
