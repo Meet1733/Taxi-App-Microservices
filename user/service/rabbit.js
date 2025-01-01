@@ -1,4 +1,6 @@
 const amqp = require('amqplib');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const RABBITMQ_URL = process.env.RABBIT_URL;
 
